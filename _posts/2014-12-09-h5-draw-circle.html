@@ -56,11 +56,11 @@ arr[5] = [1/3*Math.PI,2/3*Math.PI ];
 arr[6] = [1/4*Math.PI,3/4*Math.PI ];
 for(var i=1;i<=arr.length;i++){
 	var canvas = document.getElementById(i);
-	var anticlockwise = true;
+	var anticlockwise = false;
 	var context = canvas.getContext("2d");
 	context.beginPath();
 	if(i!=6){
-		anticlockwise = false;
+		anticlockwise = true;
 		context.moveTo(100,100);
 	}
 	context.arc(100,100,100,arr[i][0],arr[i][1],anticlockwise);
