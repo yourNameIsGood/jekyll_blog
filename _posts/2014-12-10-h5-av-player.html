@@ -1,0 +1,29 @@
+<!doctype>
+<style>
+#videoDiv{text-align: center;}
+</style>
+
+
+<input type='text' id='file_path' style="width:50%">
+<input type="file" id="select_file" >
+
+<div id="videoDiv">
+		
+	</div>
+
+<script src="js/jquery.js" ></script>
+<script type='text/javascript'>
+$(function(){
+	$('input[type=file]').change(function(){
+		var file = $('#select_file').val();
+		var filename = file.replace(/^.*[\\\/]/, '');
+		var path = $('#file_path').val();
+		alert(path+filename);
+		var str = '<video id="video"  width="800" height="600" controls autoplay><source src="'+path+filename+'">  </video>';
+		$('#videoDiv').append(str);
+		$('source').attr('src',filename);
+		console.log($('source').attr('src'));
+	console.log(filename);
+	})
+})
+</script>
