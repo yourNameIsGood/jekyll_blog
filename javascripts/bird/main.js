@@ -1,7 +1,8 @@
 var xpos = 800;
 var ypos = 570;
-var birdimg = {{site.baseurl}}+"/stylesheets/bird/bird.png";
-var pipeimg = {{site.baseurl}}+"/stylesheets/bird/pipe.png";
+var siteurl = $('#sitebaseurl').val();
+var birdimg = siteurl+"/stylesheets/bird/bird.png";
+var pipeimg = siteurl+"/stylesheets/bird/pipe.png";
 var game = new Phaser.Game(this.xpos, ypos, Phaser.AUTO, 'gameDiv');
 
 // Create our 'main' state that will contain the game
