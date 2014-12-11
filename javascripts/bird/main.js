@@ -1,5 +1,7 @@
 var xpos = 800;
 var ypos = 570;
+var birdimg = "{{site.baseurl}}/stylesheets/bird/bird.png";
+var pipeimg = "{{site.baseurl}}/stylesheets/bird/pipe.png";
 var game = new Phaser.Game(this.xpos, ypos, Phaser.AUTO, 'gameDiv');
 
 // Create our 'main' state that will contain the game
@@ -7,8 +9,8 @@ var mainState = {
 
     preload: function() {
         game.stage.backgroundColor = '#71c5cf';
-        game.load.image('pipe', 'assets/pipe.png');
-        game.load.image('birdddd', 'assets/bird.png');
+        game.load.image('pipe', pipeimg);
+        game.load.image('birdddd', birdimg);
     },
 
     create: function() {
