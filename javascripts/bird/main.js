@@ -26,6 +26,7 @@ var mainState = {
         // Call the 'jump' function when the spacekey is hit
         var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         spaceKey.onDown.add(this.jump, this);
+        game.input.onDown.add(this.jump, this);//testing touch event
 
         this.pipes = game.add.group(); // Create a group
         this.pipes.enableBody = true;  // Add physics to the group
