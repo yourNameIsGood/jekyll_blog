@@ -42,7 +42,7 @@ var mainState = {
         game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this); 
     },
     jump: function() {
-        this.bird.body.velocity.y = 300; // bird jumping speed
+        this.bird.body.velocity.y = -300; // bird jumping speed
     },
 
     // Restart the game
