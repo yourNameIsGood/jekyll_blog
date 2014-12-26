@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>The PhoneGap Framework</title>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="/jekyll_blog/css/reveal/reveal.css">
+		<link rel="stylesheet" href="/jekyll_blog/css/reveal/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="/jekyll_blog/css/reveal/zenburn.css">
+
+		<!-- Include the appropriate print stylesheet -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '/jekyll_blog/css/reveal/pdf.css' : '/jekyll_blog/css/reveal/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>PhoneGap</h1>
+					<img src='/jekyll_blog/images/reveal/phonegap_fac.png'>
+					<p>
+						<small>PhoneGap is a free and open source framework that allows you to create mobile apps using standardized web APIs for the platforms you care about.</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Use PhoneGap if you are:</h2>
+					<p>
+						<ul>
+						<li> 做web开发，并想将其打包成多个移动平台上的应用 </li>
+						<br>
+						<li>移动开发，想利用webview来调用 设备系统的api</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>windows && mac 桌面版</h2>
+						<p> + </p>
+						<p> Developer app [android, ios, win phone] </p>
+						<p> from : <a href="http://phonegap.com/blog/2014/12/11/phonegap-desktop-app-beta/" target="_blank" >phonegap-desktop-app-beta/</a> </p>
+					</section>
+					<section>
+						<p>download desktop and app</p>
+						<img src="/jekyll_blog/images/reveal/desktop_app.png">
+						<p>android手机下载phonegap developer app(用360助手，豌豆荚没有，google play被墙）</p>
+					</section>
+					<section>
+						<p>start server then connect </p>
+						<img src="/jekyll_blog/images/reveal/desktop_app_start_connect.png">
+					</section>
+					<section>
+						<p> 当然，也可以用cli代替desktop 程序：</p>
+						<br>
+						<ul>
+						<li>npm intall -g phonegap</li>
+						<li>install phonegap developer app on your phone</li>
+						<li>phonegap create hello_project</li>
+						<li>cd hello_project</li>
+						<li>phonegap serve # not server !!</li>
+						<br>
+						<li>[phonegap] starting app server...</li>
+						<li>[phonegap] listening on 192.168.1.76:3000</li>
+						<li>[phonegap]</li>
+						<li>[phonegap] ctrl-c to stop the server .....</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>在线编译打包</h2>
+						<p><a href="https://build.phonegap.com" target="_blank">https://build.phonegap.com</a> </p>
+						<img src="/jekyll_blog/images/reveal/adobe_git.png">
+						<p>从github上导入项目</p>
+					</section>
+					<section>
+						<p>同时编译成android，win phone；ios死活编译不成功。。</p>
+						<img src="/jekyll_blog/images/reveal/build_result.png">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>本地编译打包</h2>
+						<p>在打包成apk，xap，ipa之前，都需要安装好各自的SDK.</p>
+					</section>
+					<section>
+						<ul>
+						<li>下载elicpse</li>
+						<li>安装Android SDK</li>
+						<li>eclipse 中下载Android Development Tool(ADT) plugin</li>
+						<li>下载最新的phonegap </li>
+					</section>
+					<section>
+						<img src="/jekyll_blog/images/reveal/eclipse_new_android_project.png">
+					</section>
+					<section>
+						<li>在项目的根目录, 创建两个目录: /libs, /assets/www</li>
+						<li>复制phonegap.js 到/assets/www目录;phonegap.jar 到/libs目录;xml文到夹到/res 目录</li>
+						<li>将class的继承类由 Activity改为DroidGap</li>
+						<li>将setContentView() 这一行替换为 super.loadUrl("file:///android_asset/www/index.html");</li>
+						<li>添加import com.phonegap.*;移除 import android.app.Activity;</li>
+						<img src="/jekyll_blog/images/reveal/eclipse_android_code.png">
+					</section>
+					<section>
+						<p>修改AndroidManifest.xml,将下面的权限设置拷贝到versionName之后</p>
+						<pre>
+						<code class="javascript" data-trim contenteditable style="font-size: 18px;">
+			 				&ltsupports-screens &#013;
+							android:largeScreens="true"
+							android:normalScreens="true"
+							android:smallScreens="true"
+							android:resizeable="true"
+							android:anyDensity="true"
+							/&gt
+							&ltuses-permission android:name="android.permission.CAMERA" /&gt
+							&ltuses-permission android:name="android.permission.VIBRATE" /&gt
+							&ltuses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt
+							&ltuses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt
+							&ltuses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt
+							&ltuses-permission android:name="android.permission.READ_PHONE_STATE" /&gt
+							&ltuses-permission android:name="android.permission.INTERNET" /&gt
+							&ltuses-permission android:name="android.permission.RECEIVE_SMS" /&gt
+							&ltuses-permission android:name="android.permission.RECORD_AUDIO" /&gt
+							&ltuses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /&gt
+							&ltuses-permission android:name="android.permission.READ_CONTACTS" /&gt
+							&ltuses-permission android:name="android.permission.WRITE_CONTACTS" /&gt
+							&ltuses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt
+							&ltuses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />&gt
+							&ltuses-permission android:name="android.permission.GET_ACCOUNTS" /&gt
+						</code>
+						</pre>
+						<pre><code>&ltactivity android:name="com.phonegap.DroidGap" android:label="@string/app_name"
+						&#013android:configChanges="orientation|keyboardHidden"&gt 
+						&#013&ltintent-filter&gt &lt/intent-filter&gt &lt/activity&gt
+						</code></pre>
+					</section>
+					<section>
+					<p>assets/www/index.html</p>
+					<pre><code class="html" data-trim  style="font-size: 18px;">
+						&lt!DOCTYPE html&gt &#013&lthtml&gt
+&lthead&gt
+    <meta charset="utf-8" />
+    <title> Flappy Bird Clone </title>
+&lt/head&gt
+&ltbody&gt
+    <div id="bird"> </div>
+&lt/body&gt
+<script type="text/javascript" src="/jekyll_blog/javascripts/reveal/jquery.js"></script>
+<script type="text/javascript" src="/jekyll_blog/javascripts/reveal/phaser.min.js"></script>
+<script type="text/javascript" src="/jekyll_blog/javascripts/reveal/bird.js"></script>
+&lt/html&gt
+					</code></pre>
+					</section>
+				<section>
+					<h2>bird.js</h2>
+					<pre><code style="max-height:600px;width:1000px">if($('#bird').length>0){
+	var xpos = 1200;
+	var ypos = 570;
+	var game = new Phaser.Game(this.xpos, ypos, Phaser.AUTO, 'bird');
+
+	// Create our 'main' state that will contain the game
+	var mainState = {
+	    preload: function() {
+	        game.stage.backgroundColor = '#71c5cf';
+	        game.load.image('pipe', 'img/pipe.png');
+	        game.load.image('birdddd', 'img/logo.png');
+	    },
+
+	    create: function() {
+	        game.physics.startSystem(Phaser.Physics.ARCADE);
+	        // Display the bird on the screen
+	        this.bird = this.game.add.sprite(100, 105, 'birdddd');
+
+	        // Add gravity to the bird to make it fall
+	        game.physics.arcade.enable(this.bird);
+	        this.bird.body.gravity.y = 1000;
+
+	        // Call the 'jump' function when the spacekey is hit
+	        var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+	        spaceKey.onDown.add(this.jump, this);
+	        game.input.onDown.add(this.jump, this);
+
+	        this.pipes = game.add.group(); // Create a group
+	        this.pipes.enableBody = true;  // Add physics to the group
+	        this.pipes.createMultiple(20, 'pipe'); // Create 20 pipes
+	        this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+	    },
+
+	    update: function() {// This function is called 60 times per second
+	        if (this.bird.inWorld == false)
+	            this.restartGame();
+	        game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this); 
+	    },
+	    jump: function() {
+	        this.bird.body.velocity.y = -400; // bird jumping speed
+	    },
+
+	    // Restart the game
+	    restartGame: function() {
+	        // Start the 'main' state, which restarts the game
+	        game.state.start('main');
+	    },
+	    addOnePipe: function(x, y) {  
+	        // Get the first dead pipe of our group
+	        var pipe = this.pipes.getFirstDead();
+	        // Set the new position of the pipe
+	        pipe.reset(x, y);
+	        console.log('x:'+x+"  y:"+y);
+	        pipe.body.velocity.x = -400;          // Add velocity to the pipe to make it move left
+	        // Kill the pipe when it's no longer visible
+	        pipe.checkWorldBounds = true;
+	        pipe.outOfBoundsKill = true;
+	    },
+	    addRowOfPipes: function() {  
+	        // Pick where the hole will be
+	        var hole = Math.floor(Math.random() * 5) + 1;
+	        // Add the 6 pipes 
+	        for (var i = 0; i < 8; i++){
+	            if (i != hole && i != hole + 1 && i!=hole+2){
+	                this.addOnePipe(xpos, i * 60 + 10);   
+	            }
+	        }
+	    },
+	};
+	// Add and start the 'main' state to start the game
+	game.state.add('main', mainState);
+	game.state.start('main');
+} // if div exists
+					</code></pre>
+				</section>
+
+				<section>
+					<h2><a href="http://yournameisgood.github.io/jekyll_blog/2014/12/11/phaser-bird.html" target="_blank">play on your device</a></h2>
+					<img src="/jekyll_blog/images/reveal/birdgame.png">
+				</section>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="/jekyll_blog/javascripts/reveal/head.min.js"></script>
+		<script src="/jekyll_blog/javascripts/reveal/reveal.js"></script>
+
+		<script>
+			var siteurl = "/jekyll_blog/";
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: siteurl+'javascripts/reveal/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: siteurl+'javascripts/reveal/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: siteurl+'javascripts/reveal/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: siteurl+'javascripts/reveal/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: siteurl+'javascripts/reveal/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+		<!-- Everything below this point is unrelated to the slideshow -->
+
+		<script>
+			if( !navigator.userAgent.match( /(iphone|android)/gi ) && !!document.querySelector ) {
+				// document.querySelector( '.share-reveal' ).style.display = 'block';
+				// document.querySelector( '.fork-reveal' ).style.display = 'block';
+			}
+		</script>
+
+	</body>
+</html>
